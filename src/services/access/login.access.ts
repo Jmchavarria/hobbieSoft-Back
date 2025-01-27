@@ -26,7 +26,6 @@ export const login = async (email: string) => {
 
             info: {
                 id: user?.id,
-
                 accessToken
             }
         }
