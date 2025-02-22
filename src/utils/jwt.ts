@@ -4,5 +4,5 @@ import { envs } from "../config";
 
 export const generateToken = (user: any) => {
 
-  return jwt.sign(user, envs.JWT_SECRET_KEY, { expiresIn: '10m'  } )
+  return jwt.sign(user, envs.JWT_SECRET_KEY, { expiresIn: '10s' } )
 };

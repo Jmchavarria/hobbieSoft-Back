@@ -36,6 +36,8 @@ export const logout: ExpressController = async (req, res, next) => {
 export const getUserInfo: ExpressController = async (req, res, next) => {
   try {
     const { id } = req.params;
+   
+    
     res.status(200).json(await accessServices.getUserInfo(id));
   } catch (error) {
     console.error("Error to get user:", error);

@@ -13,11 +13,12 @@ app.use(express.json())
 
 app.use('/api', router)
 
-app.use(errorHandler)
 
 app.get('/prueba', (req, res) => {
     res.send('HOLA MUNDO CON NODE Y EXPRESS')
 })
+
+app.use(errorHandler)
 
 export default app
 

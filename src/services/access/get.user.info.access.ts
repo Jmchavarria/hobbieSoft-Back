@@ -3,11 +3,20 @@ import { db } from "../../config";
 export const getUserInfo = async (id: string) => {
 
   try {
+
+    if (!id) {
+      
+      throw new Error(`The user ID is required.`);
+    }else{
+      console.log('si hay')
+    }
+
+
     const user = await db.users.findUnique({
       where: { id },
-    //   include: {
-    //     role: true,
-    //   },
+      //   include: {
+      //     role: true,
+      //   },
     });
 
     // const modules = await db.permissions.findMany({
@@ -27,6 +36,6 @@ export const getUserInfo = async (id: string) => {
   } catch (error) {
     console.error("Error fetching users in the service:", error);
     throw new Error("Failed to fetch one user info");
-  } 
+  }
 
 };

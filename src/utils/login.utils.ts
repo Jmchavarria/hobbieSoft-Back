@@ -8,12 +8,15 @@ export const validateEmailCredential = async (valueEmail: string) => {
     })
 
     if (!email) {
+        
         throw new Error("Incorrect email or password");
     }
 }
 
 export const validatePasswordCredential: CustomValidator = async (value: string, { req }) => {
     const { email, password } = req.body
+
+
     const user = await db.users.findUnique(
         {
             where:

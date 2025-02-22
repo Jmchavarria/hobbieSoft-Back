@@ -1,33 +1,19 @@
 import { validationResult } from "express-validator";
+import { Request, Response, NextFunction } from "express";
 
-export const validateResult = (req: any , res: any, next: any ) => {
+export const validateResult = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req)
     .formatWith(({ type, msg, path, location }: any) => {
-      // Filtra mensajes técnicos o irrelevantes
       if (msg.includes("Invalid `db.users.findUnique()` invocation")) {
-        return null; // Excluye el mensaje técnico
+        return null; // Excluye mensajes técnicos
       }
-
-      return {
-        type: type, 
-        path: path,
-        location,
-        message: msg,
-      };
+      return { type, path, location, message: msg };
     })
     .array()
     .filter(Boolean); // Remueve valores `null`
 
-  // Eliminar mensajes duplicados (basado en el campo)
-  const uniqueErrors = Array.from(
-    new Map(errors.map((error) => [error?.path, error])).values()
-  );
-
-  if (uniqueErrors.length > 0) {
-    return res.status(400).json({
-      status: "error",
-      errors: uniqueErrors,
-    });
+  if (errors.length > 0) {
+    return next({ status: 400, message: "Validation Error", errors }); // ⬅️ Pasamos el error a errorHandler
   }
 
   next();

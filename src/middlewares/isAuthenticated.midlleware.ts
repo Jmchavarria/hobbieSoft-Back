@@ -6,16 +6,33 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
   const token = req.cookies?.routineSofToken;
 
   if (!token) {
-    return res.status(401).json({ message: "Token no encontrado en las cookies" });
+    return next({ status: 401, message: 'Token no encontrado en las cookies' })
   }
 
   try {
+
     jwt.verify(token, envs.JWT_SECRET_KEY);
-    // req.user = decoded; // Si necesitas pasar datos del token a la request
+
     next(); // Continúa al siguiente middleware
+
+
   } catch (error: any) {
     if (error.name === "TokenExpiredError") {
-      return res.status(401).json({ message: "El token ha expirado. Por favor, vuelve a iniciar sesión." });
+
+      return next({ status: 401, message: 'Token expired,log in again ' })
+
+      throw new Error('Token expired')
+      // return res.status(401).json(
+      //   {
+      //     errors: [{
+
+      //       message: 'Token expirado. Por favor, inicia sesión nuevamente.  '
+
+      //     }
+      //     ]
+      //   })
+
+      // [{ errors : "Token expirado. Por favor, inicia sesión nuevamente." }]);
     } else if (error.name === "JsonWebTokenError") {
       return res.status(403).json({ message: "Token inválido. No tienes autorización para acceder." });
     } else {

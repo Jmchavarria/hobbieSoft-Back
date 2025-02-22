@@ -10,6 +10,6 @@ router.use('/auth', authRoutes)
 router.use('/hola', (req, res) => {
     res.send('HOLAAA')
 })
-router.use('/', userRoutes)
+router.use('/', isAuthenticated, userRoutes)
 
 export default router

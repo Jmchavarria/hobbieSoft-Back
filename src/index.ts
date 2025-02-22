@@ -7,7 +7,7 @@ import { envs } from './config'
 const PORT: string = process.env.PORT || '8000'
 
 const main = async () => {
-    // console.log('ESTO ES LO QUE ME LLEGA', envs.JWT_SEED)
+    // console.log('utES LO QUE ME LLEGA', envs.JWT_SEED)
     // CREACIÓN DEL SERVER PASANDOLE COMO PARÁMETRO EL APP 
     const server = http.createServer(app)
 

@@ -15,6 +15,7 @@ export const login = async (email: string) => {
 
         if (!user) {
             throw new Error("User not found");
+            
         }
 
 
@@ -23,7 +24,6 @@ export const login = async (email: string) => {
 
         return {
             message: `Welcome ${user?.name} ${user?.lastName}`,
-
             info: {
                 id: user?.id,
                 accessToken

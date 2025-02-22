@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 
+interface IError {
+  msg: string;
+  type: string;
+  value: any;
+  path: string;
+  location: string;
+}
 export const errorCatcher = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  interface IError {
-    msg: string;
-    type: string;
-    value: any;
-    path: string;
-    location: string;
-  }
 
   const errors = validationResult(req)
     .formatWith(({ msg, type, value, path, location }: any) => {
@@ -27,6 +27,7 @@ export const errorCatcher = (
     .array();
 
   if (errors.length > 0) {
+    console.log('ESTO ES LO QUE ME MUESTRA EN EL BACK', errors)
     return res.status(400).json({ errors: errors });
   }
 

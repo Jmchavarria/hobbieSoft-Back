@@ -43,11 +43,6 @@ main().catch((error) => {
 }) 
 
 
-
-
-
-
-
 // import { PrismaClient } from '@prisma/client';
 // import bcrypt from 'bcrypt';
 // import { users, posts } from './data';
