@@ -7,11 +7,9 @@ const router = Router()
 
 const { getAll, getUser } = userController
 
-
 router.get('/',)
 
 router.get('/getAll',getAll)
-
 
 router.get('/:id', getUser)
 

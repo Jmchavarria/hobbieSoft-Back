@@ -15,7 +15,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
     next(); // Continúa al siguiente middleware
 
-
   } catch (error: any) {
     if (error.name === "TokenExpiredError") {
 

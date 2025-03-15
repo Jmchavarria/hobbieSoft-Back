@@ -4,34 +4,30 @@ export const getUserInfo = async (id: string) => {
 
   try {
 
-    if (!id) {
-      
-      throw new Error(`The user ID is required.`);
-    }else{
-      console.log('si hay')
-    }
-
-
     const user = await db.users.findUnique({
       where: { id },
-      //   include: {
-      //     role: true,
-      //   },
+      include: {
+        role: true,
+      },
     });
 
-    // const modules = await db.permissions.findMany({
-    // //   where: { roleId: user?.roleId },
-    //   distinct: ['moduleId'],
-    //   select: {
-    //     id: true,
-    //     status: true,
-    //     privilege: true,
-    //     module: true
-    //   },
-    // });
+    const modules = await db.permissions.findMany({
+      where: { roleId: user?.roleId },
+      distinct: ['moduleId'],
+      select: {
+        id: true,
+        status: true,
+        privilege: true,
+        module: true
+      },
+    });
 
-    // return { message: `Welcome ${user?.role?.name} ${user?.name} ${user?.lastName}`, info: { user, modules } };
-    return { message: `Welcome ${user?.name} ${user?.lastName}`, info: { user } };
+    return {
+      message: `Welcome ${user?.role?.name} ${user?.name} ${user?.lastName} `, info: {
+        name: user ? user.name : null, // Se asigna null si no hay usuario
+        modules
+      }
+    };
 
   } catch (error) {
     console.error("Error fetching users in the service:", error);
