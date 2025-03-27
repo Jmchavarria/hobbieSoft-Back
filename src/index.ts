@@ -17,7 +17,7 @@ const main = async () => {
 
     // Corriendo el servidor
     server.listen(PORT, () => {
-        console.log(`Servidor corriendo en http:localhost:${PORT}`)
+        console.log(`Sreervidor corriendo en http:localhost:${PORT}`)
     })
 }
 

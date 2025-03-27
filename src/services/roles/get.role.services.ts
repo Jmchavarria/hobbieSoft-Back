@@ -15,4 +15,4 @@ export const getRole = async (id: string) => {
         console.error('role not foun in this peticion')
         throw new Error('role not foun in this peticion')
     }
-}
+}       

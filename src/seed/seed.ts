@@ -43,20 +43,16 @@ const main = async () => {
       }
     )
 
-
     console.log('VAMOS A VER', adminRoleId)
 
 
     // Se inicializa una constante de tipo array 
     const permissionsData: any[] = [];
 
+
     // modules.map(module => ({
     //   roleId: 
     // }))
-
-
-
-
 
     // Se iteran los modules y permisos y se crea un nuevo objeto con los datos de los permisos y modulos y se agrega al array de permisos
     modules.forEach((module: any) => {
